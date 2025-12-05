@@ -69,7 +69,7 @@ pipeline {
         stage('Build & Tag Docker Image') {
             steps {
                script {
-                   withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
+                   withDockerRegistry(credentialsId: 'docker-cred', url: 'https://index.docker.io/v1/') {
                             sh "docker build -t devbhoite233/boardshack:latest ."
                     }
                }
@@ -85,7 +85,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                script {
-                   withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
+                   withDockerRegistry(credentialsId: 'docker-cred', url: 'https://index.docker.io/v1/') {
                             sh "docker push devbhoite233/boardshack:latest"
                     }
                }
@@ -135,7 +135,7 @@ pipeline {
             emailext (
                 subject: "${jobName} - Build ${buildNumber} - ${pipelineStatus.toUpperCase()}",
                 body: body,
-                to: 'ganeshperumal882000@gmail.com',
+                to: 'devbhoite34@gmail.com',
                 from: 'jenkins@example.com',
                 replyTo: 'jenkins@example.com',
                 mimeType: 'text/html',
